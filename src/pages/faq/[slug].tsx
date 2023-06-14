@@ -14,8 +14,11 @@ const Faq = ({ faq, dropdownData, faqPage, setNavTheme }: any) => {
     }, [])
 
     return (
+        <>
+        
         <Content padding>
             <Blurb text={faqPage.blurb} eyebrow="FAQs" />
+            {/* <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home  </a></li><li>{'>'}</li><li>FAQs</li></ol></nav> */}
             <Block
                 titleOverride={
                     <Dropdown
@@ -29,6 +32,8 @@ const Faq = ({ faq, dropdownData, faqPage, setNavTheme }: any) => {
                 content={<CollapsableList data={list} />}
             />
         </Content>
+        </>
+        
     )
 }
 

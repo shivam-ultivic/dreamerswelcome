@@ -36,12 +36,18 @@ const News = ({
     }
 
     return (
+        <>
+        
         <Content padding>
             <TopSection padding>
+            
                 <Header size={4} uppercase>
                     NEWS & UPDATES
                 </Header>
-                {/* <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home</a></li><li>{'>'}</li><li>News</li></ol></nav> */}
+                <div className='faq_breadcrum news_breadcrums'>
+
+                <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home</a></li><li>{'>'}</li><li>News</li></ol></nav>
+                </div>
             </TopSection>
             <GridWrapper border={false} padding>
                 <GridModule columns={4} sideScrollOnMobile={false}>
@@ -52,6 +58,8 @@ const News = ({
                 </GridModule>
             </GridWrapper>
         </Content>
+        </>
+        
     )
 }
 

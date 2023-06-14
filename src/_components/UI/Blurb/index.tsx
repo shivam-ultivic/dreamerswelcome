@@ -71,14 +71,14 @@ const StyledMarkdown = styled(MarkdownModule)`
     @media (max-width: ${BREAKPOINTS.TABLET}) {
         p {
             font-size: ${({ responsive }: any) =>
-                responsive ? '9.5vw' : rem(42)};
+        responsive ? '9.5vw' : rem(42)};
         }
     }
 
     @media (max-width: ${BREAKPOINTS.MOBILE}) {
         p {
             font-size: ${({ responsive }: any) =>
-                responsive ? '9.5vw' : rem(28)};
+        responsive ? '9.5vw' : rem(28)};
         }
     }
 `
@@ -102,12 +102,20 @@ const Blurb = ({
             {borderTop && <figure className="separator" />}
             <div>
                 {eyebrow && (
-                    <StyledHeader size={4} uppercase>
-                        {eyebrow}
+                    <>
+
+                        <StyledHeader size={4} uppercase>
+                            {eyebrow}
+                        </StyledHeader>
                         {/* <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home  </a></li><li>{'>'}</li><li>{eyebrow}</li></ol></nav> */}
-                    </StyledHeader>
+                    </>
+
                 )}
                 <StyledMarkdown data={text} />
+                <div className='faq_breadcrum'>
+                    <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home  </a></li><li>{'>'}</li><li>{eyebrow}</li></ol></nav>
+
+                </div>
                 {children && children}
             </div>
         </BlurbWrap>

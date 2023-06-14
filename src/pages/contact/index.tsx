@@ -131,12 +131,14 @@ const Contact = ({ properties, setNavTheme, setHeaderData }: any) => {
 
     // @ts-ignore
     return (
+        <>
+        <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home </a></li><li>{'>'}</li><li>CONTACT</li></ol></nav>
         <Content padding>
             <div style={{ margin: '0 15px' }}>
                 {!submitted ? (
                     <FormContainer>
+                        
                         <Header size={4}>CONTACT</Header>
-                        {/* <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home </a></li><li>{'>'}</li><li>CONTACT</li></ol></nav> */}
                         <Header size={2}>Get in touch with us!</Header>
                         <form onSubmit={handleSubmit((data) => _handleSubmit(data) )} >
                             <StyledInput {...register('name', { required: true })} placeholder="FULL NAME" />
@@ -203,6 +205,8 @@ const Contact = ({ properties, setNavTheme, setHeaderData }: any) => {
                 )}
             </div>
         </Content>
+        </>
+        
     )
 }
 

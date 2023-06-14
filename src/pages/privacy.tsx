@@ -13,7 +13,10 @@ const Privacy = ({ data, setNavTheme }: any) => {
 
     return (
         <Content padding>
-            {/* <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home </a></li><li>{'>'}</li><li>Privacy</li></ol></nav> */}
+            <div className='faq_breadcrum'>
+            <nav className={'breadcrumbs'} aria-label="breadcrumbs"><ol className={'_2jvtI'}><li><a href="/">Home </a></li><li>{'>'}</li><li>Privacy</li></ol></nav>
+            </div>
+            
             <Block hideSeparator title="Privacy" content={ <PageContent> <MarkdownModule data={content} /> </PageContent> } />
         </Content>
     )
