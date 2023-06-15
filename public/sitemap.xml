@@ -1,36 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.dreamerswelcome.com</loc>
-  </url>
-  <url>
-    <loc>https://www.dreamerswelcome.com/puertorico</loc>
-  </url>
-    <url>
-    <loc>https://www.dreamerswelcome.com/northcarolina</loc>
-  </url>
-  <url>
-    <loc>https://www.dreamerswelcome.com/about</loc>
-  </url>
-  <url>
-    <loc>https://www.dreamerswelcome.com/news</loc>
-  </url>
-    <url>
-    <loc>https://www.dreamerswelcome.com/faq/general</loc>
-  </url>
-    <url>
-    <loc>https://www.dreamerswelcome.com/contact</loc>
-  </url>
-    <url>
-    <loc>https://www.dreamerswelcome.com/stays</loc>
-  </url>
-  
-</urlset> -->
-
-
-<!-- dev site-->
-
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dev-dreamerswelcome.vercel.app</loc>
@@ -57,5 +25,4 @@
     <loc>https://dev-dreamerswelcome.vercel.app/stays</loc>
   </url>
   
-  <!-- Add more URLs for other pages -->
 </urlset> 
