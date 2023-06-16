@@ -1,14 +1,39 @@
-import fs from 'fs';
-import path from 'path';
 import { getStaticPaths } from '../[...slug]';
 import { getStaticPaths as getStaysStaticPaths } from '../stays/[[...slug]]';
 import { getStaticPaths as getbookingPolicyPaths } from '../booking-policy/[slug]';
 import { getStaticPaths as getExperiencePaths } from '../experience/[slug]';
+// import { getStaticPaths as getFaqPaths } from '../faq/[slug]';
 import { getStaticPaths as getGuideBookPaths } from '../guidebook/[slug]';
 
-// Function to generate the XML content
-function generateSitemapXML(pathsArray) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://dev-dreamerswelcome.vercel.app';
+export default async function handler(req, res) {
+  const pathsArray = [];
+  const { paths }  = await getStaticPaths(); 
+
+  pathsArray.push(...paths);
+
+  const stayPathsResult = await getStaysStaticPaths();
+  const staysPaths =  stayPathsResult.paths;
+  pathsArray.push(...staysPaths);
+
+  
+  const bookingPolicyResult= await getbookingPolicyPaths();
+  const bookingPolicyPaths =  bookingPolicyResult.paths;
+  pathsArray.push(...bookingPolicyPaths);
+
+    
+  const experienceResult= await getExperiencePaths();
+  const experiencePaths =  experienceResult.paths;
+  pathsArray.push(...experiencePaths);
+
+//   const getFaqResult= await getFaqPaths();
+//   const paths5=  getFaqResult.paths;
+//   pathsArray.push(...paths5);
+
+  const getGuideBookPathsResult= await getGuideBookPaths();
+  const guideBookPaths =  getGuideBookPathsResult.paths;
+  pathsArray.push(...guideBookPaths);
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const currentDate = new Date().toISOString();
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>`;
@@ -31,54 +56,26 @@ function generateSitemapXML(pathsArray) {
     <!-- Add more static URLs here -->
   `;
 
-  pathsArray.forEach((path) => {
+  const urls = pathsArray.map((path) => {
     if (!Array.isArray(path.params.slug)) {
-      path.params.slug = [path.params.slug];
-    }
+        path.params.slug = [path.params.slug];
+      }
 
     const slug = path.params.slug.join('/');
     const url = `${baseUrl}/${slug}`;
     xml += `
-      <url>
-        <loc>${url}</loc>
-        <lastmod>${currentDate}</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-      </url>
-    `;
+          <url>
+            <loc>${url}</loc>
+            <lastmod>${currentDate}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.5</priority>
+          </url>
+        `;
   });
 
   xml += `</urlset>`;
-  return xml;
-}
-
-export default async function handler(req, res) {
-  const pathsArray = [];
-
-  const { paths } = await getStaticPaths();
-  pathsArray.push(...paths);
-
-  const stayPathsResult = await getStaysStaticPaths();
-  const staysPaths = stayPathsResult.paths;
-  pathsArray.push(...staysPaths);
-
-  const bookingPolicyResult = await getbookingPolicyPaths();
-  const bookingPolicyPaths = bookingPolicyResult.paths;
-  pathsArray.push(...bookingPolicyPaths);
-
-  const experienceResult = await getExperiencePaths();
-  const experiencePaths = experienceResult.paths;
-  pathsArray.push(...experiencePaths);
-
-  const getGuideBookPathsResult = await getGuideBookPaths();
-  const guideBookPaths = getGuideBookPathsResult.paths;
-  pathsArray.push(...guideBookPaths);
-
-  const xml = generateSitemapXML(pathsArray);
-
-//   const filePath = path.join(process.cwd(), 'public', 'sitemap.xml');
-//   fs.writeFileSync(filePath, xml);
 
   res.setHeader('Content-Type', 'text/xml');
-  res.send(xml);
+  res.write(xml);
+  res.end();
 }
