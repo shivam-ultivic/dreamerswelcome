@@ -1,6 +1,8 @@
 import { getStaticPaths } from '../[...slug]';
 import { getStaticPaths as getStaysStaticPaths } from '../stays/[[...slug]]';
 import { getStaticPaths as getbookingPolicyPaths } from '../booking-policy/[slug]';
+import { getStaticPaths as getExperiencePaths } from '../experience/[slug]';
+import { getStaticPaths as getGuideBookPaths } from '../guidebook/[slug]';
 
 export default async function handler(req, res) {
   const pathsArray = [];
@@ -9,21 +11,22 @@ export default async function handler(req, res) {
   pathsArray.push(...paths);
 
   const stayPathsResult = await getStaysStaticPaths();
-  const paths2 =  stayPathsResult.paths;
-  pathsArray.push(...paths2);
+  const staysPaths =  stayPathsResult.paths;
+  pathsArray.push(...staysPaths);
 
   
   const bookingPolicyResult= await getbookingPolicyPaths();
-  const paths3 =  bookingPolicyResult.paths;
-  pathsArray.push(...paths3);
-  
-  
-  
+  const bookingPolicyPaths =  bookingPolicyResult.paths;
+  pathsArray.push(...bookingPolicyPaths);
 
-    for (const item of bookingPolicyResult.paths) {
-        console.log('item.s--->',item.params);
-    }
+    
+  const experienceResult= await getExperiencePaths();
+  const experiencePaths =  experienceResult.paths;
+  pathsArray.push(...experiencePaths);
 
+  const getGuideBookPathsResult= await getGuideBookPaths();
+  const guideBookPaths =  getGuideBookPathsResult.paths;
+  pathsArray.push(...guideBookPaths);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const currentDate = new Date().toISOString();
@@ -48,8 +51,11 @@ export default async function handler(req, res) {
     <!-- Add more static URLs here -->
   `;
 
-  // Add dynamic URLs from the paths obtained from getStaticPaths
   const urls = pathsArray.map((path) => {
+    if (!Array.isArray(path.params.slug)) {
+        path.params.slug = [path.params.slug];
+      }
+
     const slug = path.params.slug.join('/');
     const url = `${baseUrl}/${slug}`;
     xml += `
