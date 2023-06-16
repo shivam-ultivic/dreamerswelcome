@@ -76,8 +76,8 @@ export default async function handler(req, res) {
 
   const xml = generateSitemapXML(pathsArray);
 
-  const filePath = path.join(process.cwd(), 'public', 'sitemap.xml');
-  fs.writeFileSync(filePath, xml);
+//   const filePath = path.join(process.cwd(), 'public', 'sitemap.xml');
+//   fs.writeFileSync(filePath, xml);
 
   res.setHeader('Content-Type', 'text/xml');
   res.send(xml);
