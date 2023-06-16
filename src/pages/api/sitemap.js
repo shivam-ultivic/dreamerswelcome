@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   const guideBookPaths =  getGuideBookPathsResult.paths;
   pathsArray.push(...guideBookPaths);
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://dev-dreamerswelcome.vercel.app';
   const currentDate = new Date().toISOString();
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>`;

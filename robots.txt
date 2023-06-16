@@ -1,3 +1,3 @@
 User-agent: *
 Disallow: /
-Sitemap: https://dev-dreamerswelcome.vercel.app/sitemap.xml
+Sitemap: /api/sitemap
