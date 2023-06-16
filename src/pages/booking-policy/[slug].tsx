@@ -57,7 +57,7 @@ export async function getStaticPaths() {
     const faqs = await getPolicies()
     const paths: any = []
     faqs.forEach((x: { slug: string }) => {
-        paths.push({ params: { slug: x.slug } })
+        paths.push({ params: { slug: [x.slug] } })
     })
     return {
         // @ts-ignore

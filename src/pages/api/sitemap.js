@@ -1,0 +1,70 @@
+import { getStaticPaths } from '../[...slug]';
+import { getStaticPaths as getStaysStaticPaths } from '../stays/[[...slug]]';
+import { getStaticPaths as getbookingPolicyPaths } from '../booking-policy/[slug]';
+
+export default async function handler(req, res) {
+  const pathsArray = [];
+  const { paths }  = await getStaticPaths(); 
+
+  pathsArray.push(...paths);
+
+  const stayPathsResult = await getStaysStaticPaths();
+  const paths2 =  stayPathsResult.paths;
+  pathsArray.push(...paths2);
+
+  
+  const bookingPolicyResult= await getbookingPolicyPaths();
+  const paths3 =  bookingPolicyResult.paths;
+  pathsArray.push(...paths3);
+  
+  
+  
+
+    for (const item of bookingPolicyResult.paths) {
+        console.log('item.s--->',item.params);
+    }
+
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const currentDate = new Date().toISOString();
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+  // Add static URLs
+  xml += `
+    <url>
+      <loc>${baseUrl}</loc>
+      <lastmod>${currentDate}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+    </url>
+    <url>
+      <loc>${baseUrl}/about</loc>
+      <lastmod>${currentDate}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <!-- Add more static URLs here -->
+  `;
+
+  // Add dynamic URLs from the paths obtained from getStaticPaths
+  const urls = pathsArray.map((path) => {
+    const slug = path.params.slug.join('/');
+    const url = `${baseUrl}/${slug}`;
+    xml += `
+          <url>
+            <loc>${url}</loc>
+            <lastmod>${currentDate}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.5</priority>
+          </url>
+        `;
+  });
+
+  xml += `</urlset>`;
+
+  res.setHeader('Content-Type', 'text/xml');
+  res.write(xml);
+  res.end();
+}
