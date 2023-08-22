@@ -28,7 +28,7 @@ const GridImage = ({
     borderRadius = true,
     className,
     children,
-    hasHover = false,
+    hasHover = true,
     fullHeight = false,
     metadata,
     fixedHeight,

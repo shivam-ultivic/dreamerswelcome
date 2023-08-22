@@ -67,6 +67,9 @@ const MenuPanel = ({ opened, activeBucket, onClose }: any) => {
                         <Link href={router.query ? getLink('stays') : ""}>STAYS</Link>
                     </li>
                     <li>
+                        <Link href="/news">NEWS</Link>
+                    </li>
+                    <li>
                         <Link href={router.query ? getLink('experiences') : ""}>EXPERIENCES</Link>
                         {!activeBucket && <aside />}
                     </li>
@@ -81,9 +84,6 @@ const MenuPanel = ({ opened, activeBucket, onClose }: any) => {
                             <Link href="/about">ABOUT</Link>
                         </li>
                         <li>
-                            <Link href="/news">NEWS</Link>
-                        </li>
-                        <li>
                             <Link href="/faq/general">FAQs</Link>
                         </li>
                         <li>
@@ -94,6 +94,14 @@ const MenuPanel = ({ opened, activeBucket, onClose }: any) => {
                                 DW RADIO
                             </a>
                         </li>
+                        <li>
+                            <a
+                                href="https://giftup.app/place-order/f4fbef08-de2d-4d8e-c896-08db98c383e8?platform=hosted"
+                                target="_blank"
+                            >
+                                GIFT CARDS
+                            </a>
+                        </li>
                     </ul>
                     <ul>
                         <li>
@@ -102,6 +110,14 @@ const MenuPanel = ({ opened, activeBucket, onClose }: any) => {
                                 target="_blank"
                             >
                                 INSTA
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.tiktok.com/@dreamers.welcome"
+                                target="_blank"
+                            >
+                                TIKTOK
                             </a>
                         </li>
                         <li>
